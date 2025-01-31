@@ -1,0 +1,5 @@
+alignment-handbook/*.ipynb
+alignment-handbook/results
+alignment-handbook/alpaca_eval
+alignment-handbook/fps/save_hidden/zephyr/hidden_states.pt
+alignment-handbook/fps/save_hidden/zephyr/matrix_M.pt

@@ -1,0 +1,48 @@
+# Model arguments
+model_name_or_path: model/zephyr-7b-sft-full
+torch_dtype: bfloat16
+
+# Data training arguments
+# For definitions, see: src/h4/training/config.py
+dataset_mixer:
+  datasets/ultrafeedback_binarized: 1.0
+  # HuggingFaceH4/ultrafeedback_binarized: 1.0
+
+
+dataset_splits:
+- train
+- test
+preprocessing_num_workers: 12
+
+# DPOTrainer arguments
+bf16: true
+beta: 0.1
+do_eval: false
+evaluation_strategy: steps
+eval_steps: 1000
+gradient_accumulation_steps: 8
+gradient_checkpointing: true
+gradient_checkpointing_kwargs:
+  use_reentrant: False
+hub_model_id: vangard703/zephyr-7b-beta-Ultrafeedback-2K
+learning_rate: 3.0e-7
+log_level: info
+logging_steps: 10
+lr_scheduler_type: cosine
+max_length: 2048
+max_prompt_length: 1024
+num_train_epochs: 1
+optim: adamw_torch
+output_dir: save_model/zephyr-7b-beta-Ultrafeedback-2K
+per_device_eval_batch_size: 1
+per_device_train_batch_size: 1
+push_to_hub: False
+save_strategy: 'no'
+save_steps: 200
+save_total_limit: 1
+seed: 42
+warmup_ratio: 0.1
+loss_type: weighted
+confidence_dir: save_confidence
+self_refine_threshold: 0.1
+ref_model_for_refine: model/zephyr-7b-sft-full
